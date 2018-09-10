@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="API TEST SUITE">
+
+    <parameter name="serviceEndPoint" value="http://testapi-stage.org.com" />
+
+    <test name=" ADMIN API - CUSTOMER" >
+        <parameter name="customerRequestEndPoint" value="/api/v1.0/customers" />
+        <parameter name="statusRequestEndPoint" value="/api/v1.0/statuses" />
+
+        <classes>
+            <class name="com.org.module.tests.Customer"/>  --- classes for these
+            <class name="com.org.module.tests.Advertiser"/>
+            <class name="com.org.module.tests.Campaign"/>
+        </classes>
+
+    </test>
+</suite>
