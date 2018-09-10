@@ -1,7 +1,7 @@
-REST API RESPONSE ASSERTIONS
+**REST API RESPONSE ASSERTIONS**
 
-check for a field in response
-
+1. _`Verify a field in response`_
+****
 {
    "guid": "2c2db3b4-a576-4c19-8249-77fe3ac4338a",
    "version":10,
@@ -11,21 +11,26 @@ check for a field in response
 }
 
 response.then().statusCode(200);
+
 response.then().body("guid", startsWith("2c2db3b4"));
- response.then().body("data.message", equalTo("Accepted"));  OR  response.then().body("message", is("Unauthorized token"));
+
+response.then().body("data.message", equalTo("Accepted"));  
+OR  response.then().body("message", is("Unauthorized token"));
  
  
- Check for presence of key or if the key is not null
+2. _`Check for presence of key or if the key is not null`_
  
- response.then().body("guid", is(notNullValue()));
-  response.then().body("version",  is(greaterThan(9))));
-    response.then().body("data.any { it.key == 'guid'}", is(true));
+
+response.then().body("guid", is(notNullValue()));
+
+response.then().body("version",  is(greaterThan(9))));
+
+response.then().body("data.any { it.key == 'guid'}", is(true));
     
     
     
+3. _`Dealing with arrays`_    
     
-    
-    Multiple arrays
     
     
     {
@@ -53,13 +58,16 @@ response.then().body("guid", startsWith("2c2db3b4"));
             
             
             
-            response.then().body("data.brands.size", is(resultcount)); OR 
             
             
+response.then().body("data.brands.size", is(resultcount)); 
+
+response.then().body("data.brands.flatten().any {it.containsKey('id') }", is(true));
             
-             response.then().body("data.brands.flatten().any {it.containsKey('id') }", is(true));
             
-            Separate assertions
+4. _`Separate assertions`_
             
-            capturedVenueId = response.then().extract().path("data.guid").toString();
-            Assert.assertEquals(capturedVenueId, name, "does not match "); similarly assertnotequals, assertNotNull etc
+capturedVenueId = response.then().extract().path("data.guid").toString();
+Assert.assertEquals(capturedVenueId, name, "does not match "); 
+
+similarly assertnotequals, assertNotNull etc
